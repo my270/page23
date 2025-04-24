@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🩻 Analyse des besoins - IA pour Radiographies</title>
+    <style>
+        :root {
+            --primary-color: #2E8B57;
+            --secondary-color: #F0F8FF;
+            --accent-color: #FF8C00;
+            --text-color: #333;
+            --box-bg: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background: var(--box-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px var(--shadow);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+        }
+        .student-info {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .student-info label {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            width: 120px;
+        }
+        .student-info input {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .intro {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+        .intro h2 {
+            margin-top: 0;
+            font-size: 1.8rem;
+        }
+        .intro p {
+            line-height: 1.5;
+        }
+        .explanation {
+            font-style: italic;
+            margin: 15px 0;
+        }
+        .question-box {
+            background: var(--box-bg);
+            border: 2px solid var(--accent-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 6px var(--shadow);
+        }
+        .question-box label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        textarea, input[type="text"] {
+            width: 100%;
+            min-height: 50px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            resize: vertical;
+        }
+        .diagram {
+            background: var(--box-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .diagram-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        .diagram-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .diagram-box {
+            width: 100%;
+            min-height: 50px;
+            padding: 10px;
+            border: 1px dashed #999;
+            border-radius: 6px;
+            resize: vertical;
+        }
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: var(--accent-color);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background-color: #e67600;
+        }
+        .conclusion {
+            margin-top: 30px;
+            font-style: italic;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🩻 Système IA d'Analyse de Radios</h1>
+        </div>
+
+        <div class="student-info">
+            <label for="nom">📝 Nom:</label>
+            <input type="text" id="nom" name="nom">
+            <label for="prenom">👤 Prénom:</label>
+            <input type="text" id="prenom" name="prenom">
+        </div>
+
+        <div class="intro">
+            <h2>🎯 Identifier le besoin</h2>
+            <p>Chaque objet ou service répond à un besoin précis. Le stylo sert à écrire, la chaise à s’asseoir, et ici...</p>
+            <p>Notre <strong>IA pour l’analyse de radiographies</strong> aide les professionnels de santé à détecter rapidement anomalies et pathologies, tout en respectant des contraintes de sécurité et de confidentialité.</p>
+        </div>
+
+        <p class="explanation">💬 L’expression du besoin se décompose en 3 questions :</p>
+
+        <div class="question-box">
+            <label for="q1">1️⃣ À qui le produit rend-t-il service ?</label>
+            <textarea id="q1" name="q1"></textarea>
+        </div>
+
+        <div class="question-box">
+            <label for="q2">2️⃣ Sur quoi agit-il ?</label>
+            <textarea id="q2" name="q2"></textarea>
+        </div>
+
+        <div class="question-box">
+            <label for="q3">3️⃣ Dans quel but ?</label>
+            <textarea id="q3" name="q3"></textarea>
+        </div>
+
+        <h2 style="color: var(--primary-color);">✅ Avantages de l’IA pour le diagnostic</h2>
+
+        <div class="diagram">
+            <div class="diagram-title">🔍 Contexte d’utilisation normale</div>
+            <div class="diagram-content">
+                <textarea id="contexte1" class="diagram-box"></textarea>
+                <textarea id="contexte2" class="diagram-box"></textarea>
+                <textarea id="contexte3" class="diagram-box"></textarea>
+            </div>
+        </div>
+
+        <div class="diagram">
+            <div class="diagram-title">⚙️ Description du Système</div>
+            <div class="diagram-content">
+                <textarea id="systeme" class="diagram-box"></textarea>
+            </div>
+        </div>
+
+        <div class="conclusion">
+            <p>💡 Avant la fabrication, une analyse et une conception rigoureuses garantissent un système efficace, fiable et sûr.</p>
+        </div>
+
+        <div class="buttons">
+            <button onclick="generatePDF()">📄 Convertir en PDF</button>
+        </div>
+    </div>
+
+    <script>
+        function generatePDF() {
+            const nom = document.getElementById('nom').value;
+            const prenom = document.getElementById('prenom').value;
+            if (!nom || !prenom) {
+                alert('Veuillez remplir votre nom et prénom avant de générer le PDF.');
+                return;
+            }
+            alert(`Le PDF sera généré pour ${prenom} ${nom}.\nDans un vrai contexte, un serveur créerait le PDF.`);
+            let rapport = `Nom: ${nom}\nPrénom: ${prenom}\n\n`;
+            rapport += `1) À qui rend-t-il service ?\n${document.getElementById('q1').value}\n\n`;
+            rapport += `2) Sur quoi agit-il ?\n${document.getElementById('q2').value}\n\n`;
+            rapport += `3) Dans quel but ?\n${document.getElementById('q3').value}\n\n`;
+            rapport += `Contexte :\n- ${document.getElementById('contexte1').value}\n- ${document.getElementById('contexte2').value}\n- ${document.getElementById('contexte3').value}\n\n`;
+            rapport += `Système :\n${document.getElementById('systeme').value}\n`;
+            console.log(rapport);
+        }
+    </script>
+</body>
+</html>
