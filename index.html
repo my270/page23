@@ -44,9 +44,12 @@
         .diagram-title { font-weight: bold; font-size: 1.2rem; color: var(--accent-color); margin-bottom: 15px; }
         .diagram-content { display: grid; grid-template-columns: 1fr; gap: 15px; }
         .diagram-box { width: 100%; min-height: 50px; padding: 10px; border: 1px dashed #999; border-radius: 6px; resize: vertical; }
-        .buttons { text-align: center; margin-top: 30px; }
+        .buttons { text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
         button { padding: 12px 24px; background-color: var(--accent-color); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
         button:hover { background-color: #e67600; }
+        #first-correction { display: none; background: var(--secondary-color); padding: 20px; border-radius: 8px; margin-top: 30px; }
+        #first-correction h2 { color: var(--primary-color); margin-top: 0; }
+        #first-correction textarea { min-height: 100px; }
         .conclusion { margin-top: 30px; font-style: italic; text-align: center; }
     </style>
 </head>
@@ -110,6 +113,14 @@
 
         <div class="buttons">
             <button onclick="generatePDF()">📄 Convertir en PDF</button>
+            <button onclick="finalize()">✅ J'ai fini</button>
+        </div>
+
+        <div id="first-correction">
+            <h2>📝 Première Correction</h2>
+            <p><strong>Barème :</strong> 1 point par bonne réponse.</p>
+            <p>Collez votre correction ci-dessous :</p>
+            <textarea id="correction-input" placeholder="1) … 2) … 3) … Contexte… Système…"></textarea>
         </div>
     </div>
 
@@ -121,20 +132,28 @@
                 alert('Veuillez remplir votre nom et prénom avant de générer le PDF.');
                 return;
             }
-            // Configuration du nom de fichier
             const filename = `${prenom}_${nom}_rapport.pdf`;
-            // Sélection de l'élément à convertir
             const element = document.getElementById('rapport');
-            // Options html2pdf
             const options = {
-                margin:       10,
-                filename:     filename,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+                margin: 10,
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
             };
-            // Génération et téléchargement
             html2pdf().set(options).from(element).save();
+        }
+
+        function finalize() {
+            // Empêcher le retour en arrière
+            history.pushState(null, null, location.href);
+            window.onpopstate = function () { history.go(1); };
+            // Désactiver tous les champs
+            document.querySelectorAll('textarea, input').forEach(el => el.disabled = true);
+            // Afficher la section de correction
+            document.getElementById('first-correction').style.display = 'block';
+            // Masquer les boutons si nécessaire
+            // document.querySelector('.buttons').style.display = 'none';
         }
     </script>
 </body>
