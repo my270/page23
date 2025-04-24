@@ -47,9 +47,6 @@
         .buttons { text-align: center; margin-top: 30px; display: flex; justify-content: center; gap: 20px; }
         button { padding: 12px 24px; background-color: var(--accent-color); color: #fff; border: none; border-radius: 8px; cursor: pointer; font-size: 1rem; transition: background 0.3s; }
         button:hover { background-color: #e67600; }
-        #first-correction { display: none; background: var(--secondary-color); padding: 20px; border-radius: 8px; margin-top: 30px; }
-        #first-correction h2 { color: var(--primary-color); margin-top: 0; }
-        #first-correction textarea { min-height: 100px; }
         .conclusion { margin-top: 30px; font-style: italic; text-align: center; }
     </style>
 </head>
@@ -112,15 +109,8 @@
         </div>
 
         <div class="buttons">
-            <button onclick="generatePDF()">📄 Convertir en PDF</button>
             <button onclick="finalize()">✅ J'ai fini</button>
-        </div>
-
-        <div id="first-correction">
-            <h2>📝 Première Correction</h2>
-            <p><strong>Barème :</strong> 1 point par bonne réponse.</p>
-            <p>Collez votre correction ci-dessous :</p>
-            <textarea id="correction-input" placeholder="1) … 2) … 3) … Contexte… Système…"></textarea>
+            <button onclick="generatePDF()">📄 Convertir en PDF</button>
         </div>
     </div>
 
@@ -147,14 +137,28 @@
         function finalize() {
             // Empêcher le retour en arrière
             history.pushState(null, null, location.href);
-            window.onpopstate = function () { history.go(1); };
-            // Désactiver tous les champs
-            document.querySelectorAll('textarea, input').forEach(el => el.disabled = true);
-            // Afficher la section de correction
-            document.getElementById('first-correction').style.display = 'block';
-            // Masquer les boutons si nécessaire
-            // document.querySelector('.buttons').style.display = 'none';
+            window.onpopstate = () => history.go(1);
+            // Champs à corriger
+            const fields = [
+                {id: 'q1', label: 'À qui le produit rend-t-il service ?'},
+                {id: 'q2', label: 'Sur quoi agit-il ?'},
+                {id: 'q3', label: 'Dans quel but ?'},
+                {id: 'contexte1', label: 'Contexte - Élément 1'},
+                {id: 'contexte2', label: 'Contexte - Élément 2'},
+                {id: 'contexte3', label: 'Contexte - Élément 3'},
+                {id: 'systeme', label: 'Description du Système'}
+            ];
+            // Désactiver champs et appliquer corrections via prompt
+            fields.forEach(f => {
+                const answer = prompt(`Correction pour "${f.label}" :`, document.getElementById(f.id).value);
+                if (answer !== null) {
+                    const el = document.getElementById(f.id);
+                    el.value = answer;
+                    el.disabled = true;
+                }
+            });
         }
     </script>
 </body>
 </html>
+
